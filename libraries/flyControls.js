@@ -2,8 +2,6 @@
  * @author James Baicoianu / http://www.baicoianu.com/
  */
 
-// modified for oculus bridge control
-
 THREE.FlyControls = function ( object, domElement ) {
 
 	this.object = object;
@@ -67,8 +65,8 @@ THREE.FlyControls = function ( object, domElement ) {
 			case 38: /*up*/ this.moveState.pitchUp = 1; break;
 			case 40: /*down*/ this.moveState.pitchDown = 1; break;
 
-			case 37: /*left*/ Config.bodyAngle +=.3; break;
-			case 39: /*right*/ Config.bodyAngle -=.3; break;
+			case 37: /*left*/ this.moveState.yawLeft = 1; break;
+			case 39: /*right*/ this.moveState.yawRight = 1; break;
 
 			case 81: /*Q*/ this.moveState.rollLeft = 1; break;
 			case 69: /*E*/ this.moveState.rollRight = 1; break;
@@ -262,8 +260,8 @@ THREE.FlyControls = function ( object, domElement ) {
 	this.domElement.addEventListener( 'mousedown', bind( this, this.mousedown ), false );
 	this.domElement.addEventListener( 'mouseup',   bind( this, this.mouseup ), false );
 
-	this.domElement.addEventListener( 'keydown', bind( this, this.keydown ), false );
-	this.domElement.addEventListener( 'keyup',   bind( this, this.keyup ), false );
+	window.addEventListener( 'keydown', bind( this, this.keydown ), false );
+	window.addEventListener( 'keyup',   bind( this, this.keyup ), false );
 
 	this.updateMovementVector();
 	this.updateRotationVector();
