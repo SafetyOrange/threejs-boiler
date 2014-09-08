@@ -30,16 +30,38 @@ var Config =  {
 	  var ambientLight = new THREE.AmbientLight(0x000044);
   	  this.scene.add(ambientLight);
 
-      controls = new THREE.FlyControls(this.camera);
-      controls.dragToLook = "true";					
+      // controls = new THREE.FlyControls(this.camera);
+      // controls.dragToLook = "true";	
+
+      controller = new Leap.Controller();	
+      controls = new THREE.LeapSpringControls( this.camera , controller , this.scene );	
+
+      controls.dampening      = .75;
+	  controls.size           = 120;
+	  controls.springConstant =   1;
+	  controls.mass           = 100;
+	  controls.anchorSpeed    =  .1;
+	  controls.staticLength   = 100;
+
+	  var geo = new THREE.IcosahedronGeometry( 5, 2 ); 
+      var mat = new THREE.MeshNormalMaterial(); 
+
+      var targetMesh  = new THREE.Mesh( geo , mat );
+      var anchorMesh  = new THREE.Mesh( geo , mat );
+      var handMesh    = new THREE.Mesh( geo , mat );
+
+      controls.addTargetMarker( targetMesh );
+      controls.addAnchorMarker( anchorMesh );
+      controls.addHandMarker(     handMesh );		
 
 	
+	controller.connect();
 	},
 
 	
 	render: function() {
 
-		controls.update(1);
+		controls.update();
 		this.renderer.render( this.scene, this.camera );
 		Logic.rotate();
 
