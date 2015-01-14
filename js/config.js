@@ -10,6 +10,7 @@ var Config =  {
 	oculus: true,
 	animate: null,
 	bodyAngle: 45,
+	prevTIme: Date.now(),
 	
 	init: function() {
 
@@ -31,7 +32,9 @@ var Config =  {
   	  this.scene.add(ambientLight);
 
       controls = new THREE.FlyControls(this.camera);
-      controls.dragToLook = "true";					
+      controls.dragToLook = "true";	
+
+      Config.animate();				
 
 	
 	},
@@ -39,12 +42,38 @@ var Config =  {
 	
 	render: function() {
 
-		controls.update(1);
+		if (typeof(controls) != 'undefined'){
+			controls.update(1);
+		}
 		this.renderer.render( this.scene, this.camera );
-		Logic.rotate();
 
+		if ( typeof(animation) != 'undefined' ) {
+
+			var time = Date.now();
+
+			animation.update( time - Config.prevTime );
+
+			Config.prevTime = time;
+
+		}
+
+	},
+
+	animate: function(){
+
+		Config.render();
+		 
+        requestAnimationFrame(function(){
+            animate();
+        });
 	}
 	
 		
 };
+
+$(function() {
+
+    Config.init();
+ 
+});
 
