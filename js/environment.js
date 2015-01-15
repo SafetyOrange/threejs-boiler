@@ -18,7 +18,7 @@ var Environment =  {
 		// loadModel.loadJson("js/models/mountain.js",0,0,0,200);
 
 		horseAnim = new Environment.sceneAnim("js/models/horse.js",0,0,0,1);
-		horseAnim.playAnim();
+
 
 	}
  

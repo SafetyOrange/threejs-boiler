@@ -10,7 +10,7 @@ var Config =  {
 	oculus: true,
 	animate: null,
 	bodyAngle: 45,
-	prevTIme: Date.now(),
+	prevTime: Date.now(),
 	
 	init: function() {
 

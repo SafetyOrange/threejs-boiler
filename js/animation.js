@@ -6,16 +6,13 @@ Environment.sceneAnim = function(path, xpos, ypos, zpos, scale){
 		mesh.postion={x:xpos, y:ypos, z:zpos};
 		mesh.scale.x = mesh.scale.y = mesh.scale.z = scale;
 		Config.scene.add( mesh );
-		Environment.sceneAnim.animation = new THREE.MorphAnimation( mesh );
+		animation = new THREE.MorphAnimation( mesh );
+		animation.play();
 		
 
 	} );
 }
 
-Environment.sceneAnim.prototype.playAnim = function(){
 
-	console.log(1);
-	this.animation.play();
-}
 
 
