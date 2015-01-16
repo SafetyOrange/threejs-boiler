@@ -39,7 +39,6 @@ var Config =  {
 	
 	},
 
-	
 	render: function() {
 
 		if (typeof(controls) != 'undefined'){
@@ -56,7 +55,7 @@ var Config =  {
 		Config.render();
 		 
         requestAnimationFrame(function(){
-            playScene();
+            Config.playScene();
         });
 	},
 
