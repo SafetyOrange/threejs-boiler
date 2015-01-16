@@ -10,7 +10,7 @@ var Config =  {
 	oculus: true,
 	animate: null,
 	bodyAngle: 45,
-	prevTime: Date.now(),
+	clock: new THREE.Clock(),
 	
 	init: function() {
 
@@ -47,15 +47,27 @@ var Config =  {
 		}
 		this.renderer.render( this.scene, this.camera );
 
-		if ( typeof(animation) != 'undefined' ) {
+		if(typeof(Environment) != 'undefined'){
 
-			var time = Date.now();
 
-			animation.update( time - Config.prevTime );
+			var delta = this.clock.getDelta();
 
-			Config.prevTime = time;
+			THREE.AnimationHandler.update( delta );
 
+			for ( var i = 0; i < Environment.animations.length; i ++ ){
+				if ( typeof(Environment.animations[i]) != 'undefined' ) {
+
+						Environment.animations[ i ].update( 1000 * delta );
+
+				}
+
+
+			}
 		}
+
+		
+
+		
 
 	},
 
