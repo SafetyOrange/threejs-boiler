@@ -5,7 +5,7 @@ var Config =  {
 	
 	
 	camera: new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000),
-	scene: new THREE.Scene(),
+	scene: new Physijs.Scene,
 	renderer: new THREE.WebGLRenderer(),
 	oculus: true,
 	animate: null,
@@ -32,7 +32,8 @@ var Config =  {
   	  this.scene.add(ambientLight);
 
       controls = new THREE.FlyControls(this.camera);
-      controls.dragToLook = "true";	
+      controls.dragToLook = "true";
+
 
       Config.playScene();				
 
@@ -45,6 +46,8 @@ var Config =  {
 			controls.update(1);
 		}
 		this.renderer.render( this.scene, this.camera );
+
+		this.scene.simulate();
 
 		this.animate();
 
