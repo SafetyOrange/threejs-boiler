@@ -34,7 +34,7 @@ var Config =  {
       controls = new THREE.FlyControls(this.camera);
       controls.dragToLook = "true";	
 
-      Config.animate();				
+      Config.playScene();				
 
 	
 	},
@@ -47,37 +47,37 @@ var Config =  {
 		}
 		this.renderer.render( this.scene, this.camera );
 
+		this.animate();
+
+	},
+
+	playScene: function(){
+
+		Config.render();
+		 
+        requestAnimationFrame(function(){
+            playScene();
+        });
+	},
+
+	animate: function(){
+
 		if(typeof(Environment) != 'undefined'){
 
 
 			var delta = this.clock.getDelta();
 
-			THREE.AnimationHandler.update( delta );
-
 			for ( var i = 0; i < Environment.animations.length; i ++ ){
+				
 				if ( typeof(Environment.animations[i]) != 'undefined' ) {
 
 						Environment.animations[ i ].update( 1000 * delta );
 
 				}
 
-
 			}
 		}
 
-		
-
-		
-
-	},
-
-	animate: function(){
-
-		Config.render();
-		 
-        requestAnimationFrame(function(){
-            animate();
-        });
 	}
 	
 		
